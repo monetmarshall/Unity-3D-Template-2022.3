@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour
 {
-    
+    public ScoreCounter scoreCounter; // a
+
+    void Start()
+    {
+        // Find a GameObject named ScoreCounter in the Scene Hierarchy
+        GameObject scoreGO = GameObject.Find("ScoreCounter"); // b
+        // Get the ScoreCounter (script) component of scoreGO
+        scoreCounter = scoreGO.GetComponent<ScoreCounter>();
+    }
     private void Update()
     {
       // Get the current screen position of the mouse from Input
@@ -33,6 +41,9 @@ public class Basket : MonoBehaviour
         {
             // c
             Destroy(collidedWith);
+            // Increase the Score
+            scoreCounter.score += 100; //d
+            HighScore.TRY_SET_HIGH_SCORE(scoreCounter.score);
         }
     }
 }
